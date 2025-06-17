@@ -3,47 +3,56 @@
 import { useState } from 'react';
 import TagScanner from './components/TagScanner';
 import NoindexChecker from './components/NoindexChecker';
+import SeoMetaChecker from './components/SeoMetaChecker';
+
+const TABS = [
+  { key: 'tags', label: 'Tag Scanner', component: <TagScanner /> },
+  { key: 'noindex', label: 'Noindex Checker', component: <NoindexChecker /> },
+  { key: 'seo', label: 'SEO Meta Checker', component: <SeoMetaChecker /> },
+];
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<'tags' | 'noindex'>('tags');
+  const [activeTab, setActiveTab] = useState('tags');
+
+  const currentTab = TABS.find(tab => tab.key === activeTab) || TABS[0];
 
   return (
-    <main className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <main className="min-h-screen bg-gray-100">
+      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Website Analysis Tools</h1>
-          <p className="text-xl text-gray-600">A suite of tools to help you analyze and optimize your website</p>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            Marketing Tools Suite
+          </h1>
+          <p className="text-xl text-gray-600">
+            A comprehensive set of tools for analyzing and optimizing your website&apos;s marketing implementation
+          </p>
         </div>
 
-        <div className="mb-8">
-          <div className="border-b border-gray-200">
-            <nav className="-mb-px flex space-x-8">
+        <div className="mb-8 border-b border-gray-200">
+          <nav className="flex space-x-8" role="tablist">
+            {TABS.map(tab => (
               <button
-                onClick={() => setActiveTab('tags')}
-                className={`${
-                  activeTab === 'tags'
-                    ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                className={`
+                  pb-3 px-1 text-base font-medium focus:outline-none
+                  border-b-2 transition-colors
+                  ${activeTab === tab.key
+                    ? 'border-blue-600 text-blue-600'
+                    : 'border-transparent text-gray-500 hover:text-blue-600'}
+                `}
+                aria-selected={activeTab === tab.key}
+                aria-controls={`panel-${tab.key}`}
+                role="tab"
               >
-                Tag Scanner
+                {tab.label}
               </button>
-              <button
-                onClick={() => setActiveTab('noindex')}
-                className={`${
-                  activeTab === 'noindex'
-                    ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
-              >
-                Noindex Checker
-              </button>
-            </nav>
-          </div>
+            ))}
+          </nav>
         </div>
 
-        <div className="mt-6">
-          {activeTab === 'tags' ? <TagScanner /> : <NoindexChecker />}
+        <div id={`panel-${currentTab.key}`} role="tabpanel">
+          {currentTab.component}
         </div>
       </div>
     </main>

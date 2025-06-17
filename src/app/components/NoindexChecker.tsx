@@ -11,18 +11,18 @@ interface NoindexResult {
 }
 
 const tooltips = {
-  metaTags: (
+  meta: (
     <div>
       <p className="font-semibold mb-1">Meta Tags</p>
-      <p>Meta tags are HTML elements that provide information about a webpage to search engines and browsers. The <code>noindex</code> meta tag tells search engines not to index the page.</p>
-      <p className="mt-2 text-xs text-gray-500">Example: <code>&lt;meta name="robots" content="noindex"&gt;</code></p>
+      <p>Meta tags are HTML elements that provide information about a webpage. The &quot;noindex&quot; meta tag tells search engines not to index the page.</p>
+      <p className="mt-2 text-xs">Example: <code>&lt;meta name=&quot;robots&quot; content=&quot;noindex&quot; /&gt;</code></p>
     </div>
   ),
-  robotsTxt: (
+  robots: (
     <div>
       <p className="font-semibold mb-1">Robots.txt</p>
-      <p>The robots.txt file is a text file that tells search engines which pages they can or cannot crawl. A <code>noindex</code> directive in robots.txt prevents indexing of specified pages.</p>
-      <p className="mt-2 text-xs text-gray-500">Example: <code>Disallow: /private/</code></p>
+      <p>The robots.txt file is a text file that tells search engines which pages they can or can&apos;t request from your site.</p>
+      <p className="mt-2 text-xs">Example: <code>User-agent: *\nDisallow: /private/</code></p>
     </div>
   ),
   implications: (
@@ -120,7 +120,7 @@ export default function NoindexChecker() {
             <div className="bg-gray-50 p-4 rounded-lg">
               <div className="flex items-center gap-2 mb-2">
                 <h3 className="font-semibold text-gray-900">Meta Tags Check</h3>
-                <Tooltip content={tooltips.metaTags} icon />
+                <Tooltip content={tooltips.meta} icon />
               </div>
               <div className="flex items-center gap-2">
                 {result.hasNoindexMeta ? (
@@ -140,7 +140,7 @@ export default function NoindexChecker() {
             <div className="bg-gray-50 p-4 rounded-lg">
               <div className="flex items-center gap-2 mb-2">
                 <h3 className="font-semibold text-gray-900">Robots.txt Check</h3>
-                <Tooltip content={tooltips.robotsTxt} icon />
+                <Tooltip content={tooltips.robots} icon />
               </div>
               <div className="flex items-center gap-2">
                 {result.hasNoindexRobots ? (
