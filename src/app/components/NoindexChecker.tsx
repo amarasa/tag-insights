@@ -40,7 +40,7 @@ const tooltips = {
   metaTagList: (
     <div>
       <p className="font-semibold mb-1">Found Meta Tags</p>
-      <p>These are the meta tags found on your page. Look for tags containing "robots" or "noindex" to see if indexing is blocked.</p>
+      <p>These are the meta tags found on your page. Look for tags containing &quot;robots&quot; or &quot;noindex&quot; to see if indexing is blocked.</p>
     </div>
   ),
   robotsContent: (
