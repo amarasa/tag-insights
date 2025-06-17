@@ -103,7 +103,7 @@ export default function Home() {
           } catch {}
         }
       }
-    } catch (err) {
+    } catch {
       setResult({ gtm: [], ga: [], error: "Failed to scan domain." });
     } finally {
       setLoading(false);

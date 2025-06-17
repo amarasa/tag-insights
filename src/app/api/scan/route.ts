@@ -36,7 +36,11 @@ export async function POST(req: NextRequest) {
     const html = await res.text();
     const tags = extractTags(html);
     return NextResponse.json(tags);
-  } catch (err: any) {
-    return NextResponse.json({ gtm: [], ga: [], error: err.message || "Unknown error." }, { status: 500 });
+  } catch (err: unknown) {
+    let message = "Unknown error.";
+    if (typeof err === "object" && err && "message" in err && typeof (err as any).message === "string") {
+      message = (err as any).message;
+    }
+    return NextResponse.json({ gtm: [], ga: [], error: message }, { status: 500 });
   }
 } 
