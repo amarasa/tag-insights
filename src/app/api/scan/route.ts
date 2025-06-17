@@ -38,8 +38,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(tags);
   } catch (err: unknown) {
     let message = "Unknown error.";
-    if (typeof err === "object" && err && "message" in err && typeof (err as any).message === "string") {
-      message = (err as any).message;
+    if (err instanceof Error) {
+      message = err.message;
     }
     return NextResponse.json({ gtm: [], ga: [], error: message }, { status: 500 });
   }
